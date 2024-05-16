@@ -52,16 +52,16 @@ class DefaultFirebaseOptions {
 
   static final FirebaseOptions android = FirebaseOptions(
     apiKey: dotenv.env["ANDROID_APIKEY"] ?? "",
-    appId: '1:339566482364:android:a5328d296ee261b04ad1b9',
-    messagingSenderId: '339566482364',
+    appId: dotenv.env["ANDROID_APPID"] ?? "",
+    messagingSenderId: dotenv.env["ANDROID_MESSAGING"] ?? "",
     projectId: 'just-trivia-22ec2',
     storageBucket: 'just-trivia-22ec2.appspot.com',
   );
 
   static final FirebaseOptions ios = FirebaseOptions(
     apiKey: dotenv.env["IOS_APIKEY"] ?? "",
-    appId: '1:339566482364:ios:996f6db98d9bd6a04ad1b9',
-    messagingSenderId: '339566482364',
+    appId: dotenv.env["IOS_APPID"] ?? "",
+    messagingSenderId: dotenv.env["IOS_MESSAGING"] ?? "",
     projectId: 'just-trivia-22ec2',
     storageBucket: 'just-trivia-22ec2.appspot.com',
     iosBundleId: 'com.example.mobile',
