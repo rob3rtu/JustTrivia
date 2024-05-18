@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,6 +16,12 @@ class HomeScreen extends StatelessWidget {
             context.goNamed('profile');
           },
           child: const Text("Go to Profile"),
+        ),
+        FloatingActionButton(
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+          },
+          child: const Text("Log out"),
         )
       ],
     );

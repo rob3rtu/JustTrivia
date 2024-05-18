@@ -1,16 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/screens/home.dart';
 import 'package:mobile/screens/login.dart';
 import 'package:mobile/screens/profile.dart';
 
-GoRouter goRouter() {
+GoRouter goRouter(User? user) {
   return GoRouter(
       initialLocation: "/",
       redirect: (context, state) {
-        //subject to change
-        const isAuthenticated = false;
-
-        return !isAuthenticated ? '/login' : null;
+        return user == null ? '/login' : null;
       },
       routes: <RouteBase>[
         GoRoute(
