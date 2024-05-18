@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mobile/constants/colors.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
@@ -126,10 +127,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                               Text('Password is too weak.')),
                                     );
                                   } else if (e.code == 'email-already-in-use') {
-                                    await FirebaseAuth.instance
-                                        .signInWithEmailAndPassword(
-                                            email: emailController.text,
-                                            password: passwordController.text);
+                                    try {
+                                      await FirebaseAuth.instance
+                                          .signInWithEmailAndPassword(
+                                              email: emailController.text,
+                                              password:
+                                                  passwordController.text);
+                                    } on FirebaseAuthException catch (e) {
+                                      if (e.code == 'invalid-credential' &&
+                                          context.mounted) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text('Wrong password.')),
+                                        );
+                                      }
+                                    }
                                   }
                                 } catch (e) {
                                   print(e);
@@ -152,7 +165,25 @@ class _LoginScreenState extends State<LoginScreen> {
               SignInButton(
                 padding: const EdgeInsets.all(6),
                 Buttons.google,
-                onPressed: () {},
+                onPressed: () async {
+                  try {
+                    final GoogleSignInAccount? googleUser =
+                        await GoogleSignIn().signIn();
+
+                    final GoogleSignInAuthentication? googleAuth =
+                        await googleUser?.authentication;
+
+                    final credential = GoogleAuthProvider.credential(
+                      accessToken: googleAuth?.accessToken,
+                      idToken: googleAuth?.idToken,
+                    );
+
+                    await FirebaseAuth.instance
+                        .signInWithCredential(credential);
+                  } catch (e) {
+                    print(e);
+                  }
+                },
               ),
               const SizedBox(
                 height: 30,
