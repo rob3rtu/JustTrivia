@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "339566482364",
+    "project_id": "just-trivia-22ec2",
+    "storage_bucket": "just-trivia-22ec2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339566482364:android:a5328d296ee261b04ad1b9",
+        "android_client_info": {
+          "package_name": "com.example.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339566482364-h26m7ll90l09vbkh1nlrjkdkr7bq8at0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mobile",
+            "certificate_hash": "f8747ccd6a410e2bb3e6f8f98b0d1368258e32b0"
+          }
+        },
+        {
+          "client_id": "339566482364-8etrr34rbcgfv2sidr013qfo59t201l8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJMXKuX6NG6_OHVJ7x6dqtJ5Ib8u2lk1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339566482364-8etrr34rbcgfv2sidr013qfo59t201l8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "339566482364-lcr14898giqjoga8avpuc5e7bd3a9aeo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

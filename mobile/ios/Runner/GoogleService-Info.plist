@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>339566482364-lcr14898giqjoga8avpuc5e7bd3a9aeo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.339566482364-lcr14898giqjoga8avpuc5e7bd3a9aeo</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC7bnWG-hxc4Rne5nRylZwOte7ICyv-tQU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>339566482364</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.mobile</string>
+	<key>PROJECT_ID</key>
+	<string>just-trivia-22ec2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>just-trivia-22ec2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:339566482364:ios:996f6db98d9bd6a04ad1b9</string>
+</dict>
+</plist>
