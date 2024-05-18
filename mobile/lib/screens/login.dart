@@ -14,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _showPassword = false;
+  bool _isLogin = true;
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -110,54 +111,78 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 24.0, vertical: 16),
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                try {
-                                  await FirebaseAuth.instance
-                                      .createUserWithEmailAndPassword(
-                                          email: emailController.text,
-                                          password: passwordController.text);
-                                } on FirebaseAuthException catch (e) {
-                                  if (e.code == 'weak-password' &&
-                                      context.mounted) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content:
-                                              Text('Password is too weak.')),
-                                    );
-                                  } else if (e.code == 'email-already-in-use') {
-                                    try {
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  try {
+                                    if (_isLogin) {
                                       await FirebaseAuth.instance
                                           .signInWithEmailAndPassword(
                                               email: emailController.text,
                                               password:
                                                   passwordController.text);
-                                    } on FirebaseAuthException catch (e) {
-                                      if (e.code == 'invalid-credential' &&
-                                          context.mounted) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text('Wrong password.')),
-                                        );
-                                      }
+                                    } else {
+                                      await FirebaseAuth.instance
+                                          .createUserWithEmailAndPassword(
+                                              email: emailController.text,
+                                              password:
+                                                  passwordController.text);
                                     }
+                                  } on FirebaseAuthException catch (e) {
+                                    if (e.code == 'weak-password' &&
+                                        context.mounted) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                            content:
+                                                Text('Password is too weak.')),
+                                      );
+                                    } else if (e.code ==
+                                            'email-already-in-use' &&
+                                        context.mounted) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              content: Text(
+                                                  'Email is already used.')));
+                                    } else if (e.code == 'invalid-credential' &&
+                                        context.mounted) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                            content: Text('Wrong password.')),
+                                      );
+                                    }
+                                  } catch (e) {
+                                    print(e);
                                   }
-                                } catch (e) {
-                                  print(e);
                                 }
-                              }
-                            },
-                            child: const Text("Let's play!")),
+                              },
+                              child:
+                                  Text(_isLogin ? "Log in" : "Create account")),
+                        ),
                       )
                     ],
                   )),
               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Divider(
-                  thickness: 0.5,
-                ),
+                child: Row(children: <Widget>[
+                  Expanded(child: Divider()),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      "OR",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  Expanded(child: Divider()),
+                ]),
               ),
               const SizedBox(
                 height: 40,
@@ -188,12 +213,28 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 30,
               ),
-              SignInButton(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
-                Buttons.facebookNew,
-                onPressed: () {},
-              )
+              Expanded(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        _isLogin = !_isLogin;
+                      });
+                    },
+                    child: Text(
+                      _isLogin
+                          ? "Don't have an account? Create one!"
+                          : "Already have an account? Log in!",
+                      style: const TextStyle(
+                          color: Colors.white,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.white),
+                    ),
+                  ),
+                ],
+              ))
             ],
           ),
         ),
