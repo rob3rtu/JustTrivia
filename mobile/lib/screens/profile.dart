@@ -6,17 +6,22 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text("Profile screen"),
-        FloatingActionButton(
-          onPressed: () {
-            context.goNamed('home');
-          },
-          child: const Text("Go to Home"),
-        )
-      ],
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Profile screen"),
+            FloatingActionButton(
+              heroTag: "profileButton",
+              onPressed: () {
+                context.goNamed('home');
+              },
+              child: const Text("Go to Home"),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

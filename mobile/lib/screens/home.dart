@@ -7,23 +7,28 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text("Home screen"),
-        FloatingActionButton(
-          onPressed: () {
-            context.goNamed('profile');
-          },
-          child: const Text("Go to Profile"),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Home screen"),
+            FloatingActionButton(
+              heroTag: "homeButton",
+              onPressed: () {
+                context.goNamed('profile');
+              },
+              child: const Text("Go to Profile"),
+            ),
+            FloatingActionButton(
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+              },
+              child: const Text("Log out"),
+            )
+          ],
         ),
-        FloatingActionButton(
-          onPressed: () async {
-            await FirebaseAuth.instance.signOut();
-          },
-          child: const Text("Log out"),
-        )
-      ],
+      ),
     );
   }
 }
