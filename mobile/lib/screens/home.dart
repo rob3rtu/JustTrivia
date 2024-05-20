@@ -1,29 +1,33 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:mobile/constants/colors.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text("Home screen"),
-        FloatingActionButton(
-          onPressed: () {
-            context.goNamed('profile');
-          },
-          child: const Text("Go to Profile"),
+    return Scaffold(
+      backgroundColor: AppColors.darkPurple,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Home screen",
+              style: TextStyle(color: Colors.white),
+            ),
+            FloatingActionButton(
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+              },
+              child: const Text("Log out"),
+            )
+          ],
         ),
-        FloatingActionButton(
-          onPressed: () async {
-            await FirebaseAuth.instance.signOut();
-          },
-          child: const Text("Log out"),
-        )
-      ],
+      ),
+
     );
   }
 }
