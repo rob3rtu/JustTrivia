@@ -12,19 +12,10 @@ class CustomBottomNavBar extends StatefulWidget {
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   int currentIndex = 0;
 
-  List<Widget> icons = [
-    const Icon(
-      Icons.home_outlined,
-      size: 42,
-    ),
-    const Icon(
-      Icons.person_outline,
-      size: 42,
-    ),
-    const Icon(
-      Icons.settings_outlined,
-      size: 42,
-    )
+  List<IconData> icons = [
+    Icons.home,
+    Icons.person_outline,
+    Icons.settings_outlined,
   ];
 
   @override
@@ -58,16 +49,49 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: Colors.red,
+              color: const Color.fromRGBO(255, 255, 255, 0.2),
             ),
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 12.0),
               child: Row(
                 children: List.generate(icons.length, (index) {
                   return Expanded(
                     child: GestureDetector(
-                      child: icons[index],
+                      onTap: () {
+                        changeTab(index);
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            icons[index],
+                            size: 42,
+                            color: index == currentIndex
+                                ? Colors.white
+                                : const Color.fromRGBO(232, 234, 237, 0.5),
+                            shadows: index == currentIndex
+                                ? [
+                                    const Shadow(
+                                        color: Colors.white,
+                                        blurRadius: 8.8,
+                                        offset: Offset(0, 0))
+                                  ]
+                                : [],
+                          ),
+                          if (index == currentIndex)
+                            const Icon(
+                              Icons.circle,
+                              size: 6,
+                              color: Colors.white,
+                              shadows: [
+                                Shadow(
+                                    color: Colors.white,
+                                    blurRadius: 8.8,
+                                    offset: Offset(0, 0))
+                              ],
+                            )
+                        ],
+                      ),
                     ),
                   );
                 }),
