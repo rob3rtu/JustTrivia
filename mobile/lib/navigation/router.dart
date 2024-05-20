@@ -5,6 +5,7 @@ import 'package:mobile/navigation/scaffold_with_nav.dart';
 import 'package:mobile/screens/home.dart';
 import 'package:mobile/screens/login.dart';
 import 'package:mobile/screens/profile.dart';
+import 'package:mobile/screens/settings.dart';
 
 GoRouter goRouter(User? user) {
   final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -39,6 +40,11 @@ GoRouter goRouter(User? user) {
                 name: 'profile',
                 path: '/profile',
                 builder: (context, state) => const ProfileScreen(),
+              ),
+              GoRoute(
+                name: 'settings',
+                path: '/settings',
+                builder: (context, state) => const SettingsScreen(),
               ),
             ])
       ]);

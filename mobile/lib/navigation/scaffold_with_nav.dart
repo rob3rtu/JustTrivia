@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/constants/colors.dart';
+import 'package:mobile/navigation/bottom_nav_bar.dart';
 
 class ScaffoldWithNavigation extends StatefulWidget {
   final Widget child;
@@ -23,6 +23,9 @@ class _ScaffoldWithNavigationState extends State<ScaffoldWithNavigation> {
         case 1:
           context.goNamed('profile');
           break;
+        case 2:
+          context.goNamed('settings');
+          break;
         default:
           context.goNamed('home');
           break;
@@ -33,17 +36,18 @@ class _ScaffoldWithNavigationState extends State<ScaffoldWithNavigation> {
     }
 
     return Scaffold(
-      backgroundColor: AppColors.darkPurple,
-      body: widget.child,
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: changeTab,
-        backgroundColor: const Color(0xffe0b9f6),
-        currentIndex: currentIndex,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-      ),
-    );
+        body: widget.child, bottomNavigationBar: const CustomBottomNavBar()
+        // BottomNavigationBar(
+        //   onTap: changeTab,
+        //   backgroundColor: Colors.white,
+        //   iconSize: 32,
+        //   currentIndex: currentIndex,
+        //   items: const [
+        //     BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+        //     BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+        //     BottomNavigationBarItem(icon: Icon(Icons.settings), label: ''),
+        //   ],
+        // ),
+        );
   }
 }
