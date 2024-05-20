@@ -14,8 +14,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
 
   List<IconData> icons = [
     Icons.home,
-    Icons.person_outline,
-    Icons.settings_outlined,
+    Icons.person,
+    Icons.settings,
   ];
 
   @override
@@ -47,10 +47,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         child: Padding(
           padding: const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 8.0),
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: const Color.fromRGBO(255, 255, 255, 0.2),
-            ),
+            decoration: AppColors.transparentWhite,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12.0),
               child: Row(
