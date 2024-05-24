@@ -1,33 +1,144 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mobile/constants/colors.dart';
-
+import 'package:mobile/screens/generic/scaffold_purple.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.darkPurple,
-      body: Center(
+    return ScaffoldPurple(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "Home screen",
-              style: TextStyle(color: Colors.white),
+              "Salut, Robert! 👋",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold),
             ),
-            FloatingActionButton(
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut();
-              },
-              child: const Text("Log out"),
+            const SizedBox(
+              height: 30,
+            ),
+            const Row(
+              children: [
+                PlayBox(
+                  title: "Joaca online",
+                  image: "play_online",
+                ),
+                SizedBox(
+                  width: 25,
+                ),
+                PlayBox(
+                  title: "Cu prietenii",
+                  image: "play_with_friends",
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
+                  decoration: AppColors.transparentWhite,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "📌 Intrebarea zilei",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            ),
+                            Row(
+                              children: [
+                                const Text(
+                                  "34",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.white),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                SvgPicture.asset(
+                                  'lib/assets/flame.svg',
+                                  height: 20,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Text(
+                          "Cine a scris 'Luceafarul'?",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        )
+                      ],
+                    ),
+                  ),
+                ))
+              ],
             )
           ],
         ),
       ),
+    );
+  }
+}
 
+class PlayBox extends StatelessWidget {
+  final String title;
+  final String image;
+  const PlayBox({super.key, required this.title, required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        height: 150,
+        decoration: AppColors.transparentWhite,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.white),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SvgPicture.asset(
+                'lib/assets/$image.svg',
+                height: 60,
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
