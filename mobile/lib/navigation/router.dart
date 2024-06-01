@@ -15,7 +15,7 @@ GoRouter goRouter(User? user) {
 
   return GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: "/",
+      initialLocation: "/profile",
       redirect: (context, state) {
         return user == null ? '/login' : null;
       },

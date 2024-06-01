@@ -35,6 +35,7 @@ class SettingsItems {
       category: "Cont",
       items: [
         Item(name: "Sterge cont", icon: Icons.delete_forever),
+
       ],
     ),
   ];

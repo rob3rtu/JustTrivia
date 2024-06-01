@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile/constants/colors.dart';
+
 import 'package:mobile/models/user_model.dart';
 import 'package:mobile/screens/generic/scaffold_purple.dart';
 import 'package:provider/provider.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,6 +24,7 @@ class HomeScreen extends StatelessWidget {
             Text(
               "Salut, $username! 👋",
               style: const TextStyle(
+
                   color: Colors.white,
                   fontSize: 28,
                   fontWeight: FontWeight.bold),

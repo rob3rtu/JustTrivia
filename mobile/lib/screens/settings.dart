@@ -44,6 +44,7 @@ class SettingsScreen extends StatelessWidget {
                                 horizontal: 16.0, vertical: 12.0),
                             child: Row(
                               children: [
+
                                 Icon(
                                   SettingsItems.list[index].items[index2].icon,
                                   color: Colors.white,
@@ -51,6 +52,7 @@ class SettingsScreen extends StatelessWidget {
                                 const SizedBox(
                                   width: 5,
                                 ),
+
                                 Text(
                                   SettingsItems.list[index].items[index2].name,
                                   style: const TextStyle(
