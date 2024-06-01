@@ -34,7 +34,8 @@ class SettingsItems {
     Category(
       category: "Cont",
       items: [
-        Item(name: "Raporteaza o problema", icon: Icons.delete_forever),
+        Item(name: "Sterge cont", icon: Icons.delete_forever),
+
       ],
     ),
   ];

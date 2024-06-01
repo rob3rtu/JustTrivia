@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:mobile/models/user_model.dart';
 import 'package:mobile/navigation/router.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -13,7 +16,10 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (_) => UserModel())],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -34,10 +40,47 @@ class _MyAppState extends State<MyApp> {
         user = userParam;
       });
 
-      if (user == null) {
-        print('User is currently signed out!');
+      if (userParam != null) {
+        Future.microtask(() async {
+          QuerySnapshot existingUser = await FirebaseFirestore.instance
+              .collection("users")
+              .where("email", isEqualTo: userParam.email)
+              .get();
+
+          //exisat deja acest user in baza de date
+          if (existingUser.docs.isNotEmpty) {
+            // ignore: use_build_context_synchronously
+            Provider.of<UserModel>(context, listen: false).setUser(
+              Userr(
+                displayName: existingUser.docs.first['displayName'] ?? '',
+                email: existingUser.docs.first['email'] ?? '',
+                photoUrl: existingUser.docs.first['photoUrl'] ?? '',
+                uid: existingUser.docs.first['uid'],
+              ),
+            );
+          } else {
+            //nu exista useru deci il setez intai in baza de date si apoi in provider
+            await FirebaseFirestore.instance.collection("users").add({
+              "displayName": userParam.email?.split("@")[0],
+              "email": userParam.email,
+              'photoUrl': userParam.photoURL,
+              "uid": userParam.uid
+            }).then((value) {
+              Provider.of<UserModel>(context, listen: false).setUser(
+                Userr(
+                  displayName: userParam.email?.split("@")[0] ?? '',
+                  email: userParam.email ?? '',
+                  photoUrl: userParam.photoURL ?? '',
+                  uid: userParam.photoURL ?? '',
+                ),
+              );
+            });
+          }
+        });
       } else {
-        print('User is signed in!');
+        Future.microtask(() {
+          Provider.of<UserModel>(context, listen: false).setUser(null);
+        });
       }
     });
   }

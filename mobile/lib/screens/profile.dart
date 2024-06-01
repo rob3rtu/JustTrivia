@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/constants/colors.dart';
+
+import 'package:mobile/models/user_model.dart';
 import 'package:mobile/screens/generic/scaffold_purple.dart';
+import 'package:provider/provider.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -9,6 +13,10 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Userr? user = context.watch<UserModel>().user;
+
+
     return ScaffoldPurple(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 16.0),
@@ -30,19 +38,30 @@ class ProfileScreen extends StatelessWidget {
                               clipBehavior: Clip.antiAlias,
                               decoration:
                                   const BoxDecoration(shape: BoxShape.circle),
-                              child: Image.asset(
-                                "lib/assets/golden.png",
-                                height: profileImageSize,
-                                width: profileImageSize,
-                                fit: BoxFit.cover,
-                              ),
+
+                              child: user?.photoUrl != ''
+                                  ? Image.network(
+                                      user?.photoUrl ?? '',
+                                      height: profileImageSize,
+                                      width: profileImageSize,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset(
+                                      "lib/assets/golden.png",
+                                      height: profileImageSize,
+                                      width: profileImageSize,
+                                      fit: BoxFit.cover,
+                                    ),
+
                             ),
                             const SizedBox(
                               height: 20,
                             ),
-                            const Text(
-                              "Robert",
-                              style: TextStyle(
+
+                            Text(
+                              user?.displayName ?? '',
+                              style: const TextStyle(
+
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 24),
