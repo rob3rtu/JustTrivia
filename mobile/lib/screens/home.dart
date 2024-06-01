@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile/constants/colors.dart';
+import 'package:mobile/models/user_model.dart';
 import 'package:mobile/screens/generic/scaffold_purple.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    String? username = context.watch<UserModel>().user?.displayName;
+
     return ScaffoldPurple(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 16.0),
@@ -15,9 +19,9 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Salut, Robert! 👋",
-              style: TextStyle(
+            Text(
+              "Salut, $username! 👋",
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 28,
                   fontWeight: FontWeight.bold),
