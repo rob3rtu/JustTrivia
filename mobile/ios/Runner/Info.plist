@@ -56,5 +56,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Am nevoie de acces la poze.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Just in case.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Ca sa te spionez.</string>
 </dict>
 </plist>

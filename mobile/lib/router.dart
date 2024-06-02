@@ -8,7 +8,7 @@ GoRouter goRouter(User? user) {
   return GoRouter(
       initialLocation: "/",
       redirect: (context, state) {
-        return user == null ? '/login' : null;
+        return user == null ? '/login' : '/';
       },
       routes: <RouteBase>[
         GoRoute(
