@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/constants/colors.dart';
 
 import 'package:mobile/models/user_model.dart';
 import 'package:mobile/screens/generic/scaffold_purple.dart';
 import 'package:provider/provider.dart';
-
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,7 +24,6 @@ class HomeScreen extends StatelessWidget {
             Text(
               "Salut, $username! 👋",
               style: const TextStyle(
-
                   color: Colors.white,
                   fontSize: 28,
                   fontWeight: FontWeight.bold),
@@ -32,18 +31,22 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            const Row(
+            Row(
               children: [
                 PlayBox(
                   title: "Joaca online",
                   image: "play_online",
+                  onTap: () {},
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 25,
                 ),
                 PlayBox(
                   title: "Cu prietenii",
                   image: "play_with_friends",
+                  onTap: () {
+                    context.pushNamed('rules');
+                  },
                 ),
               ],
             ),
@@ -114,35 +117,43 @@ class HomeScreen extends StatelessWidget {
 class PlayBox extends StatelessWidget {
   final String title;
   final String image;
-  const PlayBox({super.key, required this.title, required this.image});
+  final VoidCallback onTap;
+  const PlayBox(
+      {super.key,
+      required this.title,
+      required this.image,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        height: 150,
-        decoration: AppColors.transparentWhite,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.white),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SvgPicture.asset(
-                'lib/assets/$image.svg',
-                height: 60,
-              )
-            ],
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          height: 150,
+          decoration: AppColors.transparentWhite,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SvgPicture.asset(
+                  'lib/assets/$image.svg',
+                  height: 60,
+                )
+              ],
+            ),
           ),
         ),
       ),
