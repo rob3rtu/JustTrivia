@@ -5,6 +5,7 @@ import 'package:mobile/navigation/scaffold_with_nav.dart';
 import 'package:mobile/screens/home.dart';
 import 'package:mobile/screens/login.dart';
 import 'package:mobile/screens/match/create_or_join.dart';
+import 'package:mobile/screens/match/created_room.dart';
 import 'package:mobile/screens/match/rules.dart';
 import 'package:mobile/screens/profile.dart';
 import 'package:mobile/screens/settings.dart';
@@ -17,7 +18,7 @@ GoRouter goRouter(User? user) {
 
   return GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: "/",
+      initialLocation: "/createOrJoin",
       redirect: (context, state) {
         return user == null ? '/login' : null;
       },
@@ -36,6 +37,11 @@ GoRouter goRouter(User? user) {
           name: "createOrJoin",
           path: '/createOrJoin',
           builder: (context, state) => const CreateOrJoinScreen(),
+        ),
+        GoRoute(
+          name: "createdRoom",
+          path: '/createdRoom',
+          builder: (context, state) => const CreatedRoom(),
         ),
         ShellRoute(
             navigatorKey: shellNavigatorKey,
