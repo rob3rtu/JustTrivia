@@ -24,26 +24,6 @@ This is the home screen, with the main features:
 - question of the day
 
 Due to the lack of time and motivation, just a part the "Play with a friend" was implemented :(
-## 🏠 Home Screen
-
-![home screen](https://github.com/rob3rtu/JustTrivia/blob/main/readme_images/home.png?raw=true)
-
-This is the home screen, with the main features: 
-- play online
-- play with a friend
-- question of the day
-
-Due to the lack of time and motivation, just a part the "Play with a friend" was implemented :(
-## 🏠 Home Screen
-
-![home screen](https://github.com/rob3rtu/JustTrivia/blob/main/readme_images/home.png?raw=true)
-
-This is the home screen, with the main features: 
-- play online
-- play with a friend
-- question of the day
-
-Due to the lack of time and motivation, just a part the "Play with a friend" was implemented :(
 ## ❓ Question Screen
 ![code](https://github.com/rob3rtu/JustTrivia/blob/main/readme_images/code.png?raw=true)
 
